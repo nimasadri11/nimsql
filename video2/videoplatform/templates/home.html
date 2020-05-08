@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+
+
+
+<div class="container-fluid mt-3 float-center">
+
+    <div class="row  text-center">
+        <div class="col-md-12">
+            <div class="card bg-dark text-white">
+                <img src="{% static '/img/group.jpg' %}" class="card-img">
+                
+                <div class="card-img-overlay">
+                <div class="centered">
+                    <h2 class="banner-title">Top creators – now exclusively on Vibin</h2>
+                  
+                  
+                    <h2 class="banner-text">Enter your email to start your free trial</h2>
+
+
+                    <form method="POST" class="form-group">
+                    {% csrf_token %}
+                    {{ wizard.management_form }}
+                        <div class="row text-center my-2">
+                            <div class="col-md-12">
+                                {% render_field wizard.form.email type="email" placeholder="Your Email Address" name="email" class="banner-input" %}
+                                <span class="message">{{ field.errors }}</span>
+                                
+                                <button type="submit" class="banner-button" name="wizard_goto_step">Start Your Trial</button>
+                        </div>
+                    </form>
+                
+
+                </div>
+                </div>
+            </div>
+            
+
+            
+        
+    </div>
+    <div class="row my-5 text-center">
+        <div class="col-md-6">
+            <img class="card-img" src="https://cdn.vox-cdn.com/thumbor/G6yWd1Ch6NQMZfqIh5ex4Su9zqM=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/13636075/faze_clan.jpeg">
+        </div>
+        <div class="col-md-6 align-self-center">
+            <h1>Top YouTube stars moved exclusively to Vibin.</h1>
+        </div>
+    </div>
+    <div class="row my-5 text-center">
+        <div class="col-md-6 align-self-center">
+            <h1>No Censorship.</h1>
+        </div>
+        <div class="col-md-6">
+            <img class="card-img" src="https://pbs.twimg.com/media/DzyHpM3WkAU_Sm5.jpg">
+        </div>
+    </div>
+    <div class="row my-5 text-center">
+        <div class="col-md-6">
+            <img class="card-img" src="https://www.ezoic.com/ezoimgfmt/40cupx20bt643wowwz361l9h-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/shutterstock_610682648-min-1024x1024-1024x675.jpg?ezimgfmt=rs:795x524/rscb82/ng:webp/ngcb82">
+        </div>
+        
+        <div class="col-md-6 align-self-center">
+        <h1>No Ads.</h1>
+        </div>
+    </div>
+    <div class="row my-5 text-center">
+        <div class="col-md-12">
+           <h1>Start your free trial now</h1>
+           <form method="POST" class="form-group">
+            {% csrf_token %}
+            {{ wizard.management_form }}
+                <div class="row text-center my-2">
+                    <div class="col-md-12">
+                        {% render_field wizard.form.email type="email" placeholder="Your Email Address" name="email" class="banner-input" %}
+                        <span class="message">{{ field.errors }}</span>
+                        
+                        <button type="submit" class="banner-button" name="wizard_goto_step">Start Your Trial</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+  
+    <div class="container my-5 text-left">
+        <h1>New Videos</h1>
+        <div class="row row-cols-1 row-cols-md-3">
+            {% for video in videos %}
+            <div class="col-md-4 mb-4" style="object-fit: cover;">
+                <div class="card h-50 rounded">
+                <a href="/play?videoId={{ video.url }}">
+                  <img src="https://kyt-vibin.s3.us-east-2.amazonaws.com/thumbnails/{{ video.thumbnail }}" class="card-img-top rounded">
+                </a>
+                  <div class="thumbnail-body pt-3">
+                    <div class="row">
+                        <div class="col-md-3 my-0">
+                            
+                            <img class="img-fluid rounded-circle" src="{% static 'img/loganpaul.jpg'  %}"/>
+                        </div>
+                        <div class="col-md-9 my-0">
+                            <div class="row">
+                                <h5>{{ video.title }}</h5>
+                            </div>
+                            <div class="row">  
+                                <p class="card-text">{{ video.creator.all.0.page_name }}</p>
+                            </div>
+                            <div class="row">
+                                <p class="card-text "> {{ video.views }} views | {{ video.uploadtime }}</p>
+                            </div>
+                        </div>
+                    </div>    
+                  </div>
+                </div>
+              </div>    
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+

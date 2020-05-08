@@ -1,0 +1,111 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script> -->
+<script src="https://rawgit.com/tempusdominus/bootstrap-4/master/build/js/tempusdominus-bootstrap-4.js"></script>
+<link href="https://rawgit.com/tempusdominus/bootstrap-4/master/build/css/tempusdominus-bootstrap-4.css" rel="stylesheet"/>
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet"/> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+
+
+
+
+
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}        
+            <div class="form-group row" id="">
+                <div class="col-md-12" id="">
+                    {% render_field form.title type="text" name="title" placeholder="Title" class="textinput textInput form-control"  id="id_title" %}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-12">
+                        {% render_field form.description class="form-control" placeholder="Description" class="textinput textInput form-control"  id="id_description" maxlength="{{ form.description.max_length }}" %}
+                </div>
+            </div>
+            <div class="form-group row">
+                    <div class="col-md-6 form-group">
+                        <!-- TODO: does not show the validation message for file upload when it's missing -->
+                        <label class="btn upload-file col-md-12" > 
+                            <span id="video-label">Browse Video</span>
+                                
+                            {% render_field form.videoFile style=" opacity: 0; width: 0; float: left; " name="videoFile" id="file-upload"%}
+                            <input id="file-name" class="form-control" placeholder="" style="display: none;" readonly="readonly" >
+                        </label>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        
+                        <!-- TODO: does not show the validation message for file upload when it's missing -->
+                        <label class="btn upload-thumbnail col-md-12"> 
+                            <span id="thumbnail-label">Browse Thumbnail</span>
+                            {% render_field form.thumbnailFile style=" opacity: 0; width: 0; float: left; " name="thumbnailFile" id="thumbnail-upload" %}
+                            <input id="thumbnail-name" class="form-control" placeholder="" style="display: none;" readonly="readonly" >
+                        </label>
+                    </div>
+            </div>
+
+
+            <!-- <div class="row form-group">
+                <div class="col-md-3"></div>
+                <div class="col-md-12">
+                    <div class="input-group date col-md-12" id="datetimepicker1" data-target-input="nearest">
+                        <div class="col-md-9 mx-0 px-0">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" id="timepicker-input" placeholder="Choose when you want the video to go live"/>
+                        </div>
+                        <div class="col-md-3 mx-0 px-0">
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker" id="timepicker-inputs">
+                                <div class="input-group-text"><i class="fa fa-calendar" id="timepicker-inputs"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div> -->
+
+            <div class="form-group row"> 
+                <div class="col-md-12">
+                    <button type="submit" class="btn upload-button form-control">Upload</button>
+                </div>
+            </div>
+            
+        </form>
+
+
+
+
+          
+          <script>$(function() {
+              $('#datetimepicker1').datetimepicker();
+        });</script>
+      
+    
+
+    
+    <script>
+        document.getElementById("file-upload").onchange = function() {
+            document.getElementById("file-upload").style.display = "initial";
+            document.getElementById("video-label").innerText = this.files[0].name;
+            
+        };
+        document.getElementById("thumbnail-upload").onchange = function() {
+            document.getElementById("thumbnail-upload").style.display = "initial";
+            document.getElementById("thumbnail-label").innerText = this.files[0].name;
+        };
+    </script>
+
+{% endblock %}

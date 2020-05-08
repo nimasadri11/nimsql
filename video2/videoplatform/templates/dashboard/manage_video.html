@@ -1,0 +1,166 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+{% load widget_tweaks %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha256-m/h/cUDAhf6/iBRixTbuc8+Rg2cIETQtPcH9D3p2Kg0=" crossorigin="anonymous" />
+<!-- open-iconic-bootstrap (icon set for bootstrap) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+<link rel="stylesheet" href="{% static '/css/join.css' %}">
+<link rel="stylesheet" href="{% static '/css/base.css' %}">
+
+<div class="container-fluid mb-5 mt-3">
+    <div class="row">
+        <div class="col-md-3 text-left">
+            
+            <button class="btn upload-button" onclick="return clickedDeleteVideo();">Delete Video</button>
+            
+        </div>
+    </div>
+</div>
+
+<div class="video-js vjs-16-9  vjs-workinghover vjs-v7 vjs-theme-city">
+<video controls preload id="vid1" class=" vjs-big-play-centered vjs-tech" data-setup='{}'>
+    <source src="https://kyt-vibin.s3.us-east-2.amazonaws.com/videos/{{ video.url }}">
+  </video>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}        
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-10 text-left">
+                <div class="row form-group">
+                    <div class="mr-1 ml-2">
+                        <h2>Title:</h2>
+                    </div>
+                    <div class="col">
+                        {% render_field form.title type="text" name="title" placeholder="Title" class="textinput textInput form-control"  id="" %}
+                    </div>
+                </div>
+            
+                <div class="row form-group">
+                    <div class="col-md-1 align-self-center px-0 mx-2">
+                    <a href="/creator/logan">
+                        <img class="img-fluid rounded-circle" src="{% static 'img/loganpaul.jpg'  %}" width="80rem"/>
+                    </a>
+                    </div>
+                    <div class="col-md-10 align-self-center">
+                    <a href="/creator/logan" class="purple-link">
+                        <h4>{{ video.creator.all.0.page_name }}</h4>          
+                    </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 text-right text-white">
+                <div class="row">
+                    <div class="col-md-12">
+                    <p class="my-0 py-0">{{ video.uploadtime|date:'Y/m/d' }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    <p class="my-0 py-0">views: {{ video.views }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    <span class="oi oi-thumb-up mx-1" title="person" aria-hidden="true" style="color:white;"></span>
+                    {{ video.likes }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    <span class="oi oi-thumb-down mx-1" title="person" aria-hidden="true" style="color:white;"></span>
+                    {{ video.dislikes }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    <span class="oi oi-comment-square mx-1" title="person" aria-hidden="true" style="color:white;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    
+    
+        <hr id="hr">
+    
+        <div class="row mt-3 form-group">
+            <div class="col-md-12">
+                <h2 class="my-3">Description:</h2>
+                {% render_field form.description class="form-control description-text" placeholder="Description" class="textinput textInput form-control"  id="id_description" maxlength="{{ form.description.max_length }}" %}
+            </div>
+        </div>
+
+        <div class="row mt-3 form-group"> 
+            <div class="col-md-4 btn change-thumbnail" style="object-fit: cover;">
+                <label class="btn change-thumbnail col-md-12" style="object-fit: cover;"> 
+                    
+                    <div class="edit-wrap">
+                        <img class="edit-img img-fluid rounded" src="https://kyt-vibin.s3.us-east-2.amazonaws.com/thumbnails/{{ video.thumbnail }}" id="change-img"/>
+                        <p class="change-description rounded">Change</p>
+                        {% render_field form.thumbnailFile style="opacity: 0; width: 2; float: left; " name="thumbnailFile" id="thumbnail-upload" onchange="showNewImage()" %}
+                    </div>
+                </label>
+            </div>
+            <div class="col-md-4" style="object-fit: cover;">
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6">
+                <button type="submit" class="btn upload-button form-control">Make Changes</button>
+            </div>
+            <div class="col-md-6">
+                <button class="btn upload-button form-control" onclick="window.location.href=window.location.href">Cancel</button>
+            </div>
+        </div>
+    </div>
+  
+</form>
+
+
+
+
+
+
+
+
+  <link href="https://vjs.zencdn.net/7.7.5/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/7.7.5/video.js"></script>
+  <!-- Video.js base CSS -->
+
+<link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet">
+
+<!-- City -->
+<link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet">
+
+<!-- Fantasy -->
+<link href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css" rel="stylesheet">
+
+<!-- Forest -->
+<link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
+
+<!-- Sea -->
+<link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet">
+
+<script>
+
+function showNewImage(){
+    document.getElementById('change-img').src = window.URL.createObjectURL(document.getElementById('thumbnail-upload').files[0]);
+};
+function clickedDeleteVideo() {
+    var user_choice = window.confirm('Are you you want to delete this video?');
+    if(user_choice== true) {
+        location.pathname = '/dashboard/manage/video/delete';
+        window.location.search = jQuery.query.set("videoId", "{{ video.url }}");
+    }
+};
+
+</script>
+
+{% endblock %}
+

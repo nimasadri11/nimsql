@@ -1,0 +1,46 @@
+{% load static %}
+{% load sort_tags %}
+
+<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+
+
+
+{% for video in videos %}
+<div class="col-md-4 mb-4 infinite-item" style="object-fit: cover;">
+    <div class="card h-50 rounded">
+    <a href="/play?videoId={{ video.url }}">
+      <img src="https://kyt-vibin.s3.us-east-2.amazonaws.com/thumbnails/{{ video.thumbnail }}" class="card-img-top rounded">
+    </a>
+      <div class="thumbnail-body pt-3">
+        <div class="row">
+            <div class="col-md-3 my-0">
+                
+                <img class="img-fluid rounded-circle" src="{% static 'img/loganpaul.jpg'  %}"/>
+            </div>
+            <div class="col-md-9 my-0 text-left">
+                <div class="row">
+
+                    <h5>{{ video.title }}</h5>
+                </div>
+                <div class="row">  
+                    <p class="card-text">{{ video.creator.all.0.page_name }}</p>
+                    
+                </div>
+                <div class="row">
+                    <p class="card-text "> {{ video.views }} views | {{ video.uploadtime|date:'Y-m-d' }}</p>
+                </div>
+            </div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>    
+{% endfor %}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>
+<script src="/static/lib/infinite.min.js"></script>

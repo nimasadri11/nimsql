@@ -1,0 +1,120 @@
+body {
+    background-color: black;
+    
+}
+body {
+    font-family: "Comfortaa";
+}
+
+.background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.plan-button {
+    background-color: purple !important;
+    border: none;
+}
+.plan-button:hover {
+
+    background-color: #3D0D57 !important;
+    
+    /* color: black; */
+}
+
+
+
+.banner-title { 
+    color:yellow;
+    width:60rem;
+    font-size: 2.8rem;
+}
+
+.banner-text { 
+    color:yellow;
+    width:60rem;
+    font-size: 1.8rem;
+}
+.banner-button, .banner-input {
+    height: 2.5rem;
+    border-radius: 0.25rem;
+    border: none;
+}
+.banner-input {
+    width: 20rem;
+    padding-left: 1rem;
+}
+
+.submit-password:hover {
+    background-color: rgb(92, 2, 92);
+    color: gray;
+}
+
+.submit-password {
+    background-color: purple !important;
+    color: white;
+    width: 20rem;
+    height: 3rem;
+}
+
+.contact-button {
+    background-color: purple !important;
+    color: white;
+}
+
+.contact-button:hover {
+    background-color: rgb(92, 2, 92);
+    color: gray;
+}
+
+/* relevant styles */
+.edit-wrap {
+    position: relative;
+  }
+  
+.edit-description , .change-description {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .2s, visibility .2s;
+}
+  
+.edit-wrap:hover .edit-description {
+    visibility: visible;
+    background: white;
+    opacity: 0.6;
+    font-size: 5rem;
+    padding: 1.5rem 4rem;
+}
+.edit-wrap:hover .change-description {
+    visibility: visible;
+    background: white;
+    opacity: 0.6;
+    font-size: 4rem;
+    padding: 2.5rem 0.7rem;
+}
+
+.edit-description, .change-description {
+    color: black !important; 
+      
+}
+
+
+.card {
+    border: none;
+}
+
+
+
+.change-thumbnail {
+    font-size: 2rem;
+    overflow: hidden;
+}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="card bg-dark text-white">
+    <img class="card-img" src="{% static 'img/banner-logan.jpg' %}">
+</div>
+
+
+
+<div class="container my-3">
+    <div class="btn-group my-4">
+        <button type="button" class="btn sort-button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort By
+        </button>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="?sort=uploadtime">Upload Date</a>
+        <a class="dropdown-item" href="?sort=views">Views</a>
+        </div>
+    </div>
+    <h1>Videos</h1>
+    <div class="row row-cols-1 row-cols-md-3 infinite-container">
+        {% include 'videos-helper.html' %}
+    </div>
+        {% if page_obj.has_next %}
+            <div class="row row-cols-1 row-cols-md-3">
+                <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"></a>
+        
+                <div class="d-flex justify-content-center" style="display:none;">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+</div>
+
+
+<script>
+var infinite = new Waypoint.Infinite({
+    element: $('.infinite-container')[0],
+    handler: function(direction) {
+    
+},
+offset: 'bottom-in-view',
+
+onBeforePageLoad: function () {
+$('.spinner-border').show();
+},
+onAfterPageLoad: function () {
+$('.spinner-border').hide();
+}
+    
+});
+
+</script>
+
+
+
+{% endblock %}

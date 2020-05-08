@@ -1,0 +1,21 @@
+<div class="container my-5">
+    <h1>Recent Videos</h1>
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for video in videos %}
+        <div class="col mb-4">
+            <div class="card h-50 rounded">
+              <img src="{{ video.url }}" class="card-img-top rounded">
+              <div class="thumbnail-body text-center pt-3">
+                <h5 class="card-title">{{ video.title }}</h5>
+                
+                {% for creator in video.creator.all %}
+                    <p class="card-text">{{ creator }} | {{ video.uploadtime }}</p>
+
+                {% endfor %}
+                
+              </div>
+            </div>
+          </div>    
+        {% endfor %}
+    </div>
+</div>

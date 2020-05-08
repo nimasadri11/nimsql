@@ -1,0 +1,76 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="{% static '/css/join.css' %}">
+
+<!-- <h1 class="my-3">Contact Your Personal Advisor</h1> -->
+<p class="my-3 text-white">Disclaimer: the following people and numbers are not associated with Vibin. We use them for the sake of the prototype.</p>
+
+<div class="row my-5 text-center">
+    <div class="col-md-6">
+        <img class="card-img" src="https://images.unsplash.com/photo-1553484771-898ed465e931?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80">
+    </div>
+    <div class="col-md-6 align-self-center">
+        <h1>David, your personal Vibin advisor is here to help 24/7.</h1>
+        <button class="btn mt-2 contact-button" id="john-btn" onClick="johnBtn()">Call John</button>
+        <button class="btn mt-2 contact-button" id="john-btn-email" onClick="johnBtnEmail()">Email John</button>
+        
+    </div>
+</div>
+
+<div class="row my-5 text-center">
+    <div class="col-md-6 align-self-center">
+        <h1>Have a suggestion and want it to be heard? Contact Jack, Vibin's CEO!</h1>
+        <button class="btn mt-2 contact-button" id="jack-btn" onClick="jackBtn()">Call Jack</button>
+        <button class="btn mt-2 contact-button" id="jack-btn-email" onClick="jackBtnEmail()">Email Jack</button>
+    </div>
+    <div class="col-md-6">
+        <img class="card-img" src="https://images.unsplash.com/photo-1494708001911-679f5d15a946?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80">
+    </div>
+
+</div>
+
+
+<script>
+    function johnBtn() {
+        if (document.getElementById("john-btn").innerText == "(908) - 222 - 3333") {
+            document.getElementById("john-btn").innerText = "Contact John";
+        }
+        else {
+            document.getElementById("john-btn").innerText = "(908) - 222 - 3333";
+        }
+    }
+    function johnBtnEmail() {
+        if (document.getElementById("john-btn-email").innerText == "john@vibin.com") {
+            document.getElementById("john-btn-email").innerText = "Email John";
+        }
+        else {
+            document.getElementById("john-btn-email").innerText = "john@vibin.com";
+        }
+    }
+    function jackBtn() {
+        if (document.getElementById("jack-btn").innerText == "(908) - 444 - 5555") {
+            document.getElementById("jack-btn").innerText = "Contact Jack";
+        }
+        else {
+            document.getElementById("jack-btn").innerText = "(908) - 444 - 5555";
+        }
+    }
+    function jackBtnEmail() {
+        if (document.getElementById("jack-btn-email").innerText == "jack@vibin.com") {
+            document.getElementById("jack-btn-email").innerText = "Email Jack";
+        }
+        else {
+            document.getElementById("jack-btn-email").innerText = "jack@vibin.com";
+        }
+    }
+</script>
+
+
+
+
+{% endblock %}

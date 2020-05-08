@@ -1,0 +1,144 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="{% static '/css/join.css' %}">
+<div class="row my-3">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}      
+
+            <p>
+                <a class="btn photo-button" data-toggle="collapse" href="#bannerPhoto" role="button" aria-expanded="false" aria-controls="bannerPhoto">
+                Change Banner Photo
+                </a>
+                <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Button with data-target
+                </button> -->
+            </p>
+            <div class="collapse" id="bannerPhoto">
+                <div class="card card-body collapse-menu">
+                    {% for field in bannerForm %}
+                    {{ field.errors }}
+                    <label class="btn upload-file col-md-12" > 
+                        <span id="video-label">Browse</span>
+                            
+                        {% render_field field  style=" opacity: 0; width: 0; float: left; " name="videoFile" id="file-upload" %}
+                        
+                        <input id="file-name" class="form-control" placeholder="" style="display: none;" readonly="readonly" >
+                    </label>
+                    {% endfor %}
+                    
+                    <button type="submit" class="btn upload-file form-control">Confirm</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}      
+
+            <p>
+                <a class="btn photo-button" data-toggle="collapse" href="#profilePhoto" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Change Profile Photo
+                </a>
+                <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Button with data-target
+                </button> -->
+            </p>
+            <div class="collapse" id="profilePhoto">
+                <div class="card card-body collapse-menu">
+                    {% for field in bannerForm %}
+                    {{ field.errors }}
+                    <label class="btn upload-thumbnail col-md-12"> 
+                        <span id="thumbnail-label">Browse</span>
+                        {% render_field field style=" opacity: 0; width: 0; float: left; " name="thumbnailFile" id="thumbnail-upload" %}
+                        <input id="thumbnail-name" class="form-control" placeholder="" style="display: none;" readonly="readonly" >
+                    </label>
+                    
+                    {% endfor %}
+                    <button type="submit" class="btn upload-thumbnail form-control">Confirm</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="row text-center">
+    <div class="col-md-12">
+        <p>
+            <a class="btn video-button" data-toggle="collapse" href="#manageVideos" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Manage Videos
+            </a>
+            <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Button with data-target
+            </button> -->
+        </p>
+        <div class="collapse" id="manageVideos">
+            <div class="card card-body mr-4 collapse-menu">
+            <div class="row row-cols-1 row-cols-md-3">
+                {% for video in videos %}
+                <div class="col-md-4 mb-4" style="object-fit: cover;">
+                    <div class="card h-50 rounded">
+                    <a href="/dashboard/manage/video?videoId={{ video.url }}">
+                        <div class="edit-wrap">
+                            <img class="edit-img img-fluid rounded" src="https://kyt-vibin.s3.us-east-2.amazonaws.com/thumbnails/{{ video.thumbnail }}" />
+                            <p class="edit-description rounded">Edit</p>
+                          </div>
+                        <!-- <div class=""> -->
+                            <!-- <img src="" class="card-img-top rounded edit-image" >
+                            <div class="edit-middle ">
+                              <div class="edit-text">Edit</div>
+                            </div> -->
+                        <!-- </div> -->
+                    </a>
+                    <div class="thumbnail-body pt-3">
+                        <div class="row">
+                            <div class="col-md-3 my-0 video-edit">
+                                <img class="img-fluid rounded-circle" src="{% static 'img/loganpaul.jpg'  %}"/>
+                            </div>
+                            <div class="col-md-9 my-0 text-left">
+                                <div class="row">
+                                    <h5>{{ video.title }}</h5>
+                                </div>
+
+                                <div class="row">
+                                    <div class="text-left">
+                                        <p class="text-left">{{ video.views }} views</p>
+                                    </div>
+                                    <div class="text-right col">
+                                        <!-- <a class="btn btn-secondary" type="button" role="button" aria-haspopup="true" aria-expanded="false" href="/dashboard/manage/video?videoId={{ video.url }}" style="height:2rem;">      
+                                            ...
+                                        </a> -->
+                                        <!-- <svg class="bi bi-three-dots text-right float-right" width="2rem" height="2rem" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" clip-rule="evenodd"/>
+                                        </svg> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                    </div>
+                </div>    
+                {% endfor %}
+            </div>
+            <script>
+                document.getElementById("file-upload").onchange = function() {
+                    document.getElementById("file-upload").style.display = "initial";
+                    document.getElementById("video-label").innerText = this.files[0].name;
+                    
+                };
+                document.getElementById("thumbnail-upload").onchange = function() {
+                    document.getElementById("thumbnail-upload").style.display = "initial";
+                    document.getElementById("thumbnail-label").innerText = this.files[0].name;
+                };
+            </script>
+
+
+{% endblock %}

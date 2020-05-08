@@ -1,0 +1,293 @@
+
+@import url(//db.onlinewebfonts.com/c/84ed805b799a7034568767668b7c9316?family=YasashiiW01-Bold);
+@font-face {font-family: "YasashiiW01-Bold"; src: url("//db.onlinewebfonts.com/t/84ed805b799a7034568767668b7c9316.eot"); src: url("//db.onlinewebfonts.com/t/84ed805b799a7034568767668b7c9316.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/84ed805b799a7034568767668b7c9316.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/84ed805b799a7034568767668b7c9316.woff") format("woff"), url("//db.onlinewebfonts.com/t/84ed805b799a7034568767668b7c9316.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/84ed805b799a7034568767668b7c9316.svg#YasashiiW01-Bold") format("svg"); }
+.top-header {
+    background-color: yellow;
+    font-family: "Times New Roman";
+    
+}
+
+.nav-container {
+    /* background-color: purple;    */
+    background-image: linear-gradient(#0B233D, #221A4A, #3D0D57);
+
+}
+
+.nav-link.active {
+    background-color: transparent !important;
+    /* color: black !important; */
+    
+    
+}
+
+.nav-item > a {
+    color: white;
+}
+
+.yellow {
+    background-color: rgb(250, 250, 208);
+}
+
+
+
+
+
+
+html, body {
+    height: 100%;
+}
+.container {
+    min-height: 100%;
+    overflow: hidden;
+}
+
+
+
+.left-bar {
+    /* background-color: black; */
+    background-color: #202020;
+    color: purple;
+}
+
+.purple-text {
+    color: purple;
+}
+
+
+.content-div {
+    /* background-color: #606060; */
+    background-color: black;
+    color: yellow;
+
+}
+body {
+    font-family: "Comfortaa";
+}
+.left-bar-select:hover {
+    background-color: yellow;
+    /* background-image: linear-gradient(yellow); */
+    color: black !important;
+}
+.left-bar-select {
+    color:purple;
+}
+.nav-link:hover, .nav-link:active {
+    background-color: yellow !important;
+    color: black !important;
+    
+}
+
+.card-img-overlay {
+    /* background-color: rgba(0,0,0, 0.4); */
+    background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.95));
+    
+    
+}
+.centered {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -0%);
+  }
+.group-img-container {
+    position: relative;
+  text-align: center;
+  color: white;
+}
+.top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+  }
+.banner-title { 
+    color:yellow;
+    width:60rem;
+    font-size: 2.8rem;
+}
+
+.banner-text { 
+    color:yellow;
+    width:60rem;
+    font-size: 1.8rem;
+}
+.banner-button, .banner-input {
+    height: 3rem;
+    border-radius: 0.25rem;
+    border: none;
+}
+
+.banner-input {
+    width: 30rem;
+    padding-left: 1rem;
+}
+.banner-button {
+    background-color: purple;
+    color: white;
+    
+}
+
+.banner-input::placeholder {
+    text-align: center;
+}
+
+
+
+.dropdown.active, .dropdown:enabled, .dropdown.visited {
+    background-color: yellow !important;
+    
+}
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+    background-color: red !important;
+}
+a.dropdown-toggle {
+    background-color: transparent !important;
+}
+a.dropdown-toggle.active {
+    background-color: yellow !important;
+}
+
+
+
+.card-text {
+    color: purple;
+}
+.thumbnail-body {
+    /* background-color: white; */
+    /* text-align: center; */
+    /* height: 15rem; */
+}
+.card {
+    border: none;
+}
+
+.card-title {
+    color: purple;
+}
+
+thead , tbody {
+    /* background-color: purple !important; */
+    color: white;
+    outline: none;
+}
+
+.sort-button {
+    background-color: #3D0D57;
+    color: white;
+}
+
+.sort-button:hover {
+    background-color: rgb(41, 6, 59);
+    color: white;
+
+}
+
+.description-text {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+
+.purple-link {
+    text-decoration: none !important;
+    color: purple !important;
+}
+
+.purple-link:hover {
+    color: #3D0D57 !important;
+}
+
+#hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 0.1rem solid rgba(255, 255, 255, 0.5);
+}
+
+.upload-file, .upload-thumbnail {
+    color: black;
+    background-color: yellow;
+    height: 4rem;
+    font-size: 2rem;
+
+    overflow: hidden;
+    white-space: nowrap; /* Don't forget this one */
+    text-overflow: ellipsis;
+}
+
+.upload-file:hover, .upload-thumbnail:hover {
+    background-color: rgb(182, 182, 17);
+    color: white;
+
+}
+
+.upload-button {
+    background-color: purple;
+    color: white;
+    height: 7rem;
+    font-size: 3rem;
+}
+
+.upload-button:hover {
+    background-color: rgb(92, 2, 92);
+    color: gray;
+}
+
+#file-name, #thumbnail-name {
+    background-color: black;
+    color: purple;
+}
+
+#id_title {
+    height: 4rem;
+    font-size: 1.5rem;
+    color:black
+}
+
+#id_description {
+    color: black;
+}
+
+
+.photo-button {
+    font-size: 2.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: purple;
+    color: white;
+    padding-right: 3rem;
+}
+.photo-button:hover, .video-button:hover {
+
+    background-color: rgb(92, 2, 92);
+    color: gray;
+}
+
+.video-button {
+    background-color: purple;
+    font-size: 4rem;
+    padding: 2rem;
+    padding-right: 15.5rem;
+    padding-left: 15.5rem;
+    color: white;
+}
+
+
+
+.collapse-menu {
+    background-color: #202020;
+}
+
+.change-button {
+    background-color: yellow;
+    color: black;
+    font-size: 2rem;
+    
+}
+
+
+
+
+
+.input-text {
+    height: 2.5rem;
+    width : 20rem;
+}

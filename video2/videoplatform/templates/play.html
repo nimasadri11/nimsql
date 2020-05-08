@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha256-m/h/cUDAhf6/iBRixTbuc8+Rg2cIETQtPcH9D3p2Kg0=" crossorigin="anonymous" />
+<!-- open-iconic-bootstrap (icon set for bootstrap) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+<link rel="stylesheet" href="{% static '/css/base.css' %}">
+
+<div class="video-js vjs-16-9  vjs-workinghover vjs-v7 vjs-theme-city">
+<video controls preload id="vid1" class=" vjs-big-play-centered vjs-tech" data-setup='{}'>
+    <source src="https://kyt-vibin.s3.us-east-2.amazonaws.com/videos/{{ video.url }}">
+  </video>
+</div>
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-10 text-left">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>{{ video.title }}</h2>
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-1 align-self-center px-0 mx-2">
+          <a href="/creator/logan">
+            <img class="img-fluid rounded-circle" src="{% static 'img/loganpaul.jpg'  %}" width="80rem"/>
+          </a>
+        </div>
+        <div class="col-md-10 align-self-center">
+          <a href="/creator/logan" class="purple-link">
+            <h4>{{ video.creator.all.0.page_name }}</h4>          
+          </a>
+        </div>
+      </div>
+      
+      
+    </div>
+    <div class="col-md-2 text-right text-white">
+      <div class="row">
+        <div class="col-md-12">
+          <p class="my-0 py-0">{{ video.uploadtime|date:'Y/m/d' }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="my-0 py-0">views: {{ video.views }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span class="oi oi-thumb-up mx-1" title="person" aria-hidden="true" style="color:white;"></span>
+          {{ video.likes }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span class="oi oi-thumb-down mx-1" title="person" aria-hidden="true" style="color:white;"></span>
+          {{ video.dislikes }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span class="oi oi-comment-square mx-1" title="person" aria-hidden="true" style="color:white;"></span>
+          0
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <hr id="hr">
+  
+  <div class="row mt-3 description-text">
+    <div class="col-md-12">
+      {{ video.description }}
+    </div>
+  </div>
+
+  </div>
+  
+  <!-- <svg style="outline: 0.15rem solid yellow;" class="bi bi-play-fill" width="3.4rem" height="2rem" viewBox="0 0 16 16" fill="currentColor" xmlns="http://
+  www.w3.org/2000/svg" >
+    <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
+  </svg> -->
+</div>
+
+
+  <link href="https://vjs.zencdn.net/7.7.5/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/7.7.5/video.js"></script>
+  <!-- Video.js base CSS -->
+
+<link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet">
+
+<!-- City -->
+<link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet">
+
+<!-- Fantasy -->
+<link href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css" rel="stylesheet">
+
+<!-- Forest -->
+<link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
+
+<!-- Sea -->
+<link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet">
+{% endblock %}
+

@@ -1,0 +1,219 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row my-3">
+
+        <h1>Analytics</h1>
+    </div>
+        <div class="row">
+            <div class="col-md-12">
+                    <canvas id="viewsChart"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 my-5">
+                    <canvas id="likesChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col-md-4 my-5">
+                    <canvas id="dislikesChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col-md-4 my-5">
+                    <canvas id="commentsChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 my-5">
+                    <canvas id="genderChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col-md-8 my-5">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Country</th>
+                            <th scope="col">Viewers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for country in countries %}
+                        <tr>
+                            <th scope="row">{{ country.name }}</th>
+                            <td>{{ country.percentage }}%</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.4"></script>
+<script>
+Chart.plugins.register({
+  id: 'paddingBelowLegends',
+  beforeInit: function(chart, options) {
+    chart.legend.afterFit = function() {
+      this.height = this.height + 50;
+    };
+  }
+});
+
+const options = {
+    legend: {
+        onClick: null
+    },
+        fill: false,
+        responsive: true,
+        // plugins: {
+        //     zoom: {
+        //         zoom: {
+        //        enabled: true,
+        //        drag: {animationDuration: 1000},
+        //        mode: 'x',
+        //     speed: 0.05
+        //     }
+        //    }
+        //  },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: "Date",
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    callback: function(label, index, labels) {
+                        return label/1000+'K';
+                    }
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: "Page Views",
+                }
+            }]
+        }
+    };
+
+var genderChart = new Chart(document.getElementById('genderChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Male', 'Female'],
+        datasets: [{
+            label: 'Gender of viewers',
+            data: [70, 30],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+
+            ],
+            borderColor: [
+                'blue',
+                'red',
+            ],
+            borderWidth: 3
+        }]
+    },
+    options: {
+        legend: {
+            onClick: null
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+const dislikesChart = new Chart(document.getElementById('dislikesChart').getContext('2d'), {
+    type: 'line',
+    data: {
+    
+        labels: {{ dates|safe }},
+        datasets: [{
+            fill: true,
+            label: 'Dislikes',
+            data: {{ dislikesData }},
+            borderColor: 'rgba(255,0,0,1)',
+            backgroundColor: 'rgba(255,0,0,0.1)',
+            lineTension: 0,
+        }],
+    },
+    options: options
+});
+
+
+
+const viewsChart = new Chart(document.getElementById('viewsChart').getContext('2d'), {
+    type: 'line',
+    data: {
+    
+        labels: {{ dates|safe }},
+        datasets: [{
+            fill: true,
+            label: 'Page Views',
+            data: {{ viewsData }},
+            borderColor: 'rgba(254,139,54,1)',
+            backgroundColor: 'rgba(254,139,54,0.1)',
+            lineTension: 0,
+        }],
+    },
+    options: options
+});
+
+const likesChart = new Chart(document.getElementById('likesChart').getContext('2d'), {
+    type: 'line',
+    data: {
+    
+        labels: {{ dates|safe }},
+        datasets: [{
+            fill: true,
+            label: 'Likes',
+            data: {{ likesData }},
+            borderColor: 'rgba(0,255,0,1)',
+            backgroundColor: 'rgba(0,255,0,0.1)',
+            lineTension: 0,
+        }],
+    },
+    options: options
+});
+
+const commentsChart = new Chart(document.getElementById('commentsChart').getContext('2d'), {
+    type: 'line',
+    data: {
+        labels: {{ dates|safe }},
+        datasets: [{
+            fill: true,
+            label: 'Comments',
+            data: {{ viewsData }},
+            borderColor: 'rgba(254,139,54,1)',
+            backgroundColor: 'rgba(254,139,54,0.1)',
+            lineTension: 0,
+        }],
+    },
+    options: options
+});
+
+</script>
+{% endblock %}

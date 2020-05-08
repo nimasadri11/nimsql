@@ -1,0 +1,87 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/css/base.css' %}">
+    <link href="//db.onlinewebfonts.com/c/84ed805b799a7034568767668b7c9316?family=YasashiiW01-Bold" rel="stylesheet" type="text/css"/>
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
+    
+    
+    <script>
+        window.onload = function() {
+            var page = window.location.pathname.split('/')[1];
+            var element;
+            if (page == "") {
+                page = "home";
+            }
+            
+            document.getElementById(page + "-nav").classList.add("active");
+        }
+        function clickedLogout() {
+            var user_choice = window.confirm('Are you sure you want to log out?');
+            if(user_choice==true) {
+                location.pathname = 'logout';
+            }
+        }
+    </script>
+    <title>vibin</title>
+   
+    
+    <div class="container-fluid nav-container p-4">
+            <div class="row">
+                <div class="col-md-3  text-center pr-5">
+                <a href="/">
+                
+                {% include "logo.html" %}  
+                </a>
+                
+            </div>
+                
+            <div class="col-md-9">
+            <ul class="nav nav-pills py-3">
+                <li class="nav-item mr-3">
+                <a class="nav-link" id="home-nav" href="/">Home</a>
+                </li>
+                <li class="nav-item mr-3">
+                <a class="nav-link" id="videos-nav" href="/videos">Videos</a>
+                </li>
+                {% if request.user.is_authenticated == False %}
+                <li class="nav-item mr-3">
+                <a class="nav-link" id="login-nav" href="/login">Login</a>
+                </li>
+                <li class="nav-item mr-3">
+                <a class="nav-link" id="signup-nav" href="/signup">Sign Up</a>
+                </li>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item mr-3">
+                        <a class="nav-link" id="dashboard-nav" href="/dashboard">Dashboard</a>
+                    </li>
+
+                    <li class="nav-item dropdown mr-3">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown">Account</a>
+                        <div class="dropdown-menu">
+                            <p class="dropdown-item disabled">{{ request.user.username }}</p>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/change_password">Change Password</a>
+                            <!-- <a class="dropdown-item" href="#"></a> -->
+                            <a class="dropdown-item" id="signup-nav" href="#" onclick="return clickedLogout();">Log Out</a>
+                            
+                        </div>
+                    </li>
+                {% endif %}
+            </ul>
+            </div>
+            </div>
+        
+    </div>
+    
+  </head>
+  {% block content %}
+  {% endblock %}
